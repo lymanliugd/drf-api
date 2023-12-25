@@ -1,7 +1,7 @@
 ## Softwares
-Docker Engine version v22+
-python 3.11
-postman
+1. Docker Engine version v22+
+2. python 3.11
+3. postman
 
 ## Dependencies
 All in file app/requirements.txt
