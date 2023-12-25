@@ -18,16 +18,16 @@ It will create a folder `mysql` after first running
 6. Remove the container `docker compose down -v`
 
 ## project structure
-core
+1. core
     settings: environment varialbes configuration
     urls.py: project routes and urls
-notes
+2. notes
     migrations: DB migration files
     api_views.py: notes api views
     models.py: model note
     serializers.py: api view serializers
     urls.py: notes routes and urls
-users
+3. users
     api_views.py: users api views
     serializers.py: api view serializers
     urls.py: users routes and urls
