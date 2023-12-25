@@ -33,9 +33,9 @@ It will create a folder `mysql` after first running
     urls.py: users routes and urls
 
 ## DB schema
-notes_note: from model note
-auth_user: django built-in model 
-authtoken_token: django built-in model
+1. notes_note: from model note
+2. auth_user: django built-in model 
+3. authtoken_token: django built-in model
 
 ## Testing with postman
 1. create an auth_user
