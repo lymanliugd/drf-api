@@ -171,7 +171,10 @@ It will create a folder `mysql` after first running
     echo 'export PATH="/opt/homebrew/bin/python3.11:$PATH"' >> ~/.zshrc
     ```
 3. Open a new terminal and test: `python --version`
-1. create virtual env folder `python -m venv venv`
+1. create virtual env folder at the project root directory
+    ```
+    python -m venv venv
+    ```
 2. login venv: `source venv/bin/activate`
 3. `pip install --upgrade pip`
 4. `pip install -r requirements.txt`
