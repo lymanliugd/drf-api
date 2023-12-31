@@ -166,17 +166,19 @@ It will create a folder `mysql` after first running
 
 ## Unit tests and integration tests with pytest
 1. Install python 3.11
-2. Run the command after installation:
+2. Run the command after installation (MacOS for example):
     ```
-    echo 'export PATH="/opt/homebrew/bin/python3.10:$PATH"' >> ~/.zshrc
+    echo 'export PATH="/opt/homebrew/bin/python3.11:$PATH"' >> ~/.zshrc
     ```
-3. Open a new terminal and test: python --version
-1. python -m venv venv                          (create virtual env)
-2. source venv/bin/activate                     (access to venv)
-3. pip install --upgrade pip
-4. pip install -r requirements.txt
-5. pytest
-6. Exit venv command: deactivate
+3. Open a new terminal and test: `python --version`
+1. create virtual env folder 
+    ```python -m venv venv```
+2. login venv: 
+    ```source venv/bin/activate```
+3. `pip install --upgrade pip`
+4. `pip install -r requirements.txt`
+5. `pytest`
+6. Exit venv command: `deactivate`
 
 ## Pytest trouble shooting
 1. No module named 'django'
