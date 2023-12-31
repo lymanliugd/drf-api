@@ -2,6 +2,14 @@
 1. Docker Engine version v22+
 2. Python 3.11
 
+## Install python 3.11 (MacOS for example)
+1. brew install python@3.11
+2. Run the command after installation to set path environment variable:
+    ```
+    echo 'export PATH="/opt/homebrew/bin/python3.11:$PATH"' >> ~/.zshrc
+    ```
+3. Open a new terminal and test: `python --version`
+
 ## Installation for dev
 1. Copy `.env.exemple` to `.env` and edit values.
 2. Open file 'grant_all.sql', change the username before '@' to the value of SQL_USER in .env
@@ -165,16 +173,7 @@ It will create a folder `mysql` after first running
     ```
 
 ## Unit tests and integration tests with pytest
-1. Install python 3.11
-2. Run the command after installation to set path environment variable (MacOS for example):
-    ```
-    echo 'export PATH="/opt/homebrew/bin/python3.11:$PATH"' >> ~/.zshrc
-    ```
-3. Open a new terminal and test: `python --version`
-1. create virtual env folder at the project root directory
-    ```
-    python -m venv venv
-    ```
+1. create virtual env folder at the project root directory`python -m venv venv`
 2. login venv: `source venv/bin/activate`
 3. `pip install --upgrade pip`
 4. `pip install -r requirements.txt`
