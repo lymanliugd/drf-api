@@ -173,8 +173,8 @@ It will create a folder `mysql` after first running
     ```
 
 ## Unit tests and integration tests with pytest
-1. create virtual env folder at the project root directory`python -m venv venv`
-2. login venv: `source venv/bin/activate`
+1. Create virtual env folder at the project root directory`python -m venv venv`
+2. Login venv: `source venv/bin/activate`
 3. `pip install --upgrade pip`
 4. `pip install -r requirements.txt`
 5. `pytest`
