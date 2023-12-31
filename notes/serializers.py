@@ -18,5 +18,5 @@ class ShareNoteSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Note
-        fields = ['username']
+        fields = ['id', 'username']
         extra_kwargs = {'username': {'required': True}}

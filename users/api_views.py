@@ -13,8 +13,58 @@ from rest_framework.views import APIView
 from users.serializers import LoginSerializer, SignupSerializer
 
 
+class SignupApiView(APIView):
+    """Signup api view"""
+
+    serializer_class = SignupSerializer
+
+    def post(
+        self,
+        request: Request,
+        *args: Any,
+        **kwargs: Any,
+    ) -> Response:
+        """
+        Handle POST requests from `api/auth/signup`.
+
+        Args:
+            request: HTTP request
+            args: varied amount of non-keyword arguments
+            kwargs: varied amount of keyword arguments
+
+        Returns:
+            HTTP `Response` with empty info
+        """
+        serializer = SignupSerializer(data=request.data)
+        # Validate received data. Return a 400 response if the data was invalid.
+        serializer.is_valid(raise_exception=True)
+
+        user_data = serializer.validated_data
+        username = user_data['username']
+        password = user_data['password']
+    
+        if not 'first_name' in user_data:
+            user_data['first_name'] = ''
+        elif not 'last_name' in user_data:
+            user_data['last_name'] = ''
+       
+        user = User.objects.create(
+            username=username,
+            password=password,
+            email=user_data['email'],
+            first_name=user_data['first_name'],
+            last_name=user_data['last_name'],
+        )
+        user.set_password(password)
+        user.save()
+        Token.objects.create(user=user)
+        return Response('Signup successfully')
+
+
 class LoginApiView(APIView):
     """Login api view"""
+
+    serializer_class = LoginSerializer
 
     def post(self, request: Request, *args: Any, **kwargs: Any) -> Response:
         """
@@ -33,7 +83,7 @@ class LoginApiView(APIView):
         # Validate received data. Return a 400 response if the data was invalid.
         serializer.is_valid(raise_exception=True)
 
-        user_data = request.data
+        user_data = serializer.validated_data['user']
         password = user_data['password']
 
         user = None
@@ -58,47 +108,3 @@ class LoginApiView(APIView):
         return Response({'token': token.key})
 
 
-class SignupApiView(APIView):
-    """Signup api view"""
-
-    def post(
-        self,
-        request: Request,
-        *args: Any,
-        **kwargs: Any,
-    ) -> Response:
-        """
-        Handle POST requests from `api/auth/signup`.
-
-        Args:
-            request: HTTP request
-            args: varied amount of non-keyword arguments
-            kwargs: varied amount of keyword arguments
-
-        Returns:
-            HTTP `Response` with empty info
-        """
-        serializer = SignupSerializer(data=request.data)
-        # Validate received data. Return a 400 response if the data was invalid.
-        serializer.is_valid(raise_exception=True)
-
-        user_data = request.data
-        username = user_data['username']
-        password = user_data['password']
-    
-        if not 'first_name' in user_data:
-            user_data['first_name'] = ''
-        elif not 'last_name' in user_data:
-            user_data['last_name'] = ''
-       
-        user = User.objects.create(
-            username=username,
-            password=password,
-            email=user_data['email'],
-            first_name=user_data['first_name'],
-            last_name=user_data['last_name'],
-        )
-        user.set_password(password)
-        user.save()
-        Token.objects.create(user=user)
-        return Response()

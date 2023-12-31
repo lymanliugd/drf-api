@@ -13,16 +13,23 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 from pathlib import Path
 
 import os
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+# env = environ.Env()
+# # OS environment variables take precedence over variables from .env
+# environ.Env.read_env(str(BASE_DIR / '.env'))
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("SECRET_KEY")
+# SECRET_KEY = os.environ.get("SECRET_KEY")
+SECRET_KEY = config('SECRET_KEY')
+# SECRET_KEY = env.str('SECRET_KEY')
+# SECRET_KEY = '8sr(=w67m9*))wnmmsds_%s^lq$8c3kxdsa0@=8r$w)i)c)!+@'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = int(os.environ.get("DEBUG", default=0))
@@ -80,13 +87,13 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.TokenAuthentication',
     ],
-    # 'DEFAULT_THROTTLE_CLASSES': [
-    #     "rest_framework.throttling.ScopedRateThrottle"
-    # ],
-    # 'DEFAULT_THROTTLE_RATES': {
-    #     'high': '30/minute',
-    #     'low': '4/minute',
-    # }
+    'DEFAULT_THROTTLE_CLASSES': [
+        "rest_framework.throttling.ScopedRateThrottle"
+    ],
+    'DEFAULT_THROTTLE_RATES': {
+        'high': '30/minute',
+        'low': '4/minute',
+    }
 }
 
 
@@ -101,6 +108,9 @@ DATABASES = {
         "PASSWORD": os.environ.get("SQL_PASSWORD", "111"),
         "HOST": os.environ.get("SQL_HOST", "localhost"),
         "PORT": os.environ.get("SQL_PORT", "3306"),
+        'TEST': {
+            'NAME': 'test_mydb',
+        },
     }
 }
 

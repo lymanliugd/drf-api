@@ -19,6 +19,7 @@ class NotesApiView(APIView):
 
     permission_classes = [IsAuthenticated]
     serializer_class = NoteSerializer
+    throttle_scope = 'high'
 
     def get(self, request: Request, *args: Any, **kwargs: Any) -> Response:
         """
@@ -61,8 +62,7 @@ class NotesApiView(APIView):
         note.content = request.data.get('content')
         note.save()
 
-        return Response({'Udate note id: {id} successfully'.format(id=note.id)})
-
+        return Response('Udate note id: {id} successfully'.format(id=note.id))
 
     def post(
         self,
@@ -89,9 +89,9 @@ class NotesApiView(APIView):
         note_data = serializer.validated_data
         Note.objects.create(user=user, content=note_data['content'])
 
-        return Response({'Create the note: {content} successfully'.format(
+        return Response('Create the note: {content} successfully'.format(
             content=note_data['content'],
-        )})
+        ))
     
     def delete(
         self,
@@ -117,7 +117,7 @@ class NotesApiView(APIView):
         
         note = get_object_or_404(Note, id=kwargs.get('id'))
         note.delete()
-        return Response({'Delete the note id: {id} successfully'.format(id=kwargs.get('id'))})
+        return Response('Delete the note id: {id}'.format(id=kwargs.get('id')))
     
 
 class ShareNoteApiView(APIView):
@@ -125,6 +125,7 @@ class ShareNoteApiView(APIView):
 
     permission_classes = [IsAuthenticated]
     serializer_class = ShareNoteSerializer
+    throttle_scope = 'low'
 
     def post(self, request: Request, *args: Any, **kwargs: Any) -> Response:
         """
@@ -140,19 +141,12 @@ class ShareNoteApiView(APIView):
         # Validate received data. Return a 400 response if the data was invalid.
         serializer.is_valid(raise_exception=True)
         data = serializer.validated_data
-        print(data['user'])
+
         user = get_object_or_404(User, username=data['user']['username'])
         note = get_object_or_404(Note, id=kwargs['id'])
         new_note = Note(user=user, content=note.content)
         new_note.save()
-        return Response(
-            {
-                'Share the note: {content} with user: {username} successfully'.format(
-                    content=note.content,
-                    username=user.username,
-                ),
-            },
-        )
+        return Response()
     
 
 class SearchNoteApiView(APIView):
@@ -160,6 +154,7 @@ class SearchNoteApiView(APIView):
 
     permission_classes = [IsAuthenticated]
     serializer_class = NoteSerializer
+    throttle_scope = 'high'
 
     def get(self, request: Request, *args: Any, **kwargs: Any) -> Response:
         """

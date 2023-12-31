@@ -7,11 +7,11 @@ urlpatterns = [
     path(
         'auth/signup', 
         api_views.SignupApiView.as_view(),
-        name='app-sigup',
+        name='user-signup',
     ),
     path(
         'auth/login', 
         api_views.LoginApiView.as_view(),
-        name='app-login',
+        name='user-login',
     ),
 ]
