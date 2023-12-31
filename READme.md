@@ -33,6 +33,12 @@ It will create a folder `mysql` after first running
         `docker compose up --build`
     ```
 
+## Login DB with DB tools (MacOS and Sequel Ace for example)
+1. Host: `localhost`
+2. Username: <SQL_USER>
+3. Password: <SQL_PASSWORD>
+4. Port: `3316`
+
 ## Project structure
 1. core
     ```
