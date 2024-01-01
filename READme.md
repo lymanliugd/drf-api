@@ -97,7 +97,7 @@ It will create a folder `mysql` after first running
     Response: {"token": <token>}
     ```
 
-3. create all notes (needs Token)
+3. get all notes (needs Token)
     ```
     url: `http://localhost:8888/api/notes/`
     headers: {Key: `Authorization`, Value: `Token <token>`}  ('Token'+ whitespace + <token>)
